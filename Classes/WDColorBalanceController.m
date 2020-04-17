@@ -33,9 +33,9 @@
 
 - (void) performAdjustment
 {
-    [self.drawingController adjustColor:^(WDColor *color) { return [color colorBalanceRed:redShift_
-                                                                               green:greenShift_
-                                                                                blue:blueShift_]; }
+    [self.drawingController adjustColor:^(WDColor *color) { return [color colorBalanceRed:self->redShift_
+                                                                               green:self->greenShift_
+                                                                                blue:self->blueShift_]; }
                              scope:(WDColorAdjustStroke | WDColorAdjustFill | WDColorAdjustShadow)];
 }
 

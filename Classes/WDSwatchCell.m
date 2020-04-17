@@ -58,8 +58,8 @@
                                                      CGRectGetMaxY(self.bounds) - ((height / 3) + 1));
     } else if (!flag && selectedIndicator_){
         [UIView animateWithDuration:0.1f
-                         animations:^{ selectedIndicator_.alpha = 0; }
-                         completion:^(BOOL finished){ [selectedIndicator_ removeFromSuperview]; }];
+                         animations:^{ self->selectedIndicator_.alpha = 0; }
+                         completion:^(BOOL finished){ [self->selectedIndicator_ removeFromSuperview]; }];
         selectedIndicator_ = nil;
     }
 }

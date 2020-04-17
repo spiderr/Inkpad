@@ -8,12 +8,10 @@
 //
 //  Copyright (c) 2010-2013 Steve Sprang
 //
-
+#import "CoreGraphics/CoreGraphics.h"
 #import "WDBezierNode.h"
 #import "WDCanvas.h"
 #import "WDDrawingController.h"
-#import "WDDrawing.h"
-#import "WDElement.h"
 #import "WDGLUtilities.h"
 #import "WDLayer.h"
 #import "WDPath.h"
@@ -282,7 +280,7 @@
     }
     
     if (self.canvas.dynamicGuides && self.canvas.dynamicGuides.count) {
-        [self.canvas.dynamicGuides makeObjectsPerformSelector:@selector(render:) withObject:canvas_];
+//        [self.canvas.dynamicGuides makeObjectsPerformSelector:@selector(render:) withObject:canvas_];
     }
     
     [context presentRenderbuffer:GL_RENDERBUFFER_OES];

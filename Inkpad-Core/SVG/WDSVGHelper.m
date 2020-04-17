@@ -13,6 +13,7 @@
 
 #import "WDSVGHelper.h"
 #import "WDXMLElement.h"
+#import "CoreGraphics/CoreGraphics.h"
 
 @implementation WDSVGHelper
 

@@ -73,8 +73,8 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     dispatch_once(&onceToken, ^{
         dispatch_async([self fontQueue], ^{
             // load system fonts
-            systemFontMap = [[NSMutableDictionary alloc] init];
-            systemFamilyMap = [[NSMutableDictionary alloc] init];
+            self->systemFontMap = [[NSMutableDictionary alloc] init];
+            self->systemFamilyMap = [[NSMutableDictionary alloc] init];
             
             NSArray *families = [UIFont familyNames];
             for (NSString *family in families) {
@@ -83,8 +83,8 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
                     CFStringRef displayName = CTFontCopyDisplayName(myFont);
                     CFStringRef familyName = CTFontCopyFamilyName(myFont);
 
-                    systemFontMap[fontName] = (__bridge NSString *)displayName;
-                    systemFamilyMap[fontName] = (__bridge NSString *)familyName;
+                    self->systemFontMap[fontName] = (__bridge NSString *)displayName;
+                    self->systemFamilyMap[fontName] = (__bridge NSString *)familyName;
                     
                     CFRelease(displayName);
                     CFRelease(familyName);
@@ -92,16 +92,16 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
                 }
             }
             
-            systemFonts = [[systemFontMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+            self->systemFonts = [[self->systemFontMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
             
             // load user fonts
-            userFontMap = [NSMutableDictionary dictionary];
-            userFamilyMap = [NSMutableDictionary dictionary];
+            self->userFontMap = [NSMutableDictionary dictionary];
+            self->userFamilyMap = [NSMutableDictionary dictionary];
             for (NSString *fontPath in [self userLibraryFontPaths]) {
                 WDUserFont *userFont = [WDUserFont userFontWithFilename:fontPath];
                 if (userFont) {
-                    userFontMap[userFont.fullName] = userFont;
-                    userFamilyMap[userFont.fullName] = userFont.familyName;
+                    self->userFontMap[userFont.fullName] = userFont;
+                    self->userFamilyMap[userFont.fullName] = userFont.familyName;
                 }
             }
         });

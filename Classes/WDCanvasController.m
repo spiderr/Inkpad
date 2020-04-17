@@ -11,7 +11,6 @@
 
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
-#import "WDAbstractPath.h"
 #import "WDButton.h"
 #import "WDCanvas.h"
 #import "WDCanvasController.h"
@@ -30,7 +29,6 @@
 #import "WDLayerController.h"
 #import "WDMenu.h"
 #import "WDMenuItem.h"
-#import "WDPath.h"
 #import "WDPropertyManager.h"
 #import "WDRotateTool.h"
 #import "WDSelectionTool.h"
@@ -71,48 +69,48 @@
         [textController performSelector:@selector(selectAll) withObject:nil afterDelay:0];
     }
     
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:textController];
-    popoverController_.passthroughViews = @[canvas_];
-    
-	popoverController_.delegate = self;
-    
-    CGRect bounds = CGRectIntegral([canvas_ convertRectToView:[text bounds]]);
-    
-    UIPopoverArrowDirection permittedArrowDir = (UIPopoverArrowDirectionDown | UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight);
-    [popoverController_ presentPopoverFromRect:bounds inView:self.view permittedArrowDirections:permittedArrowDir animated:YES];
+//    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:textController];
+//    popoverController_.passthroughViews = @[canvas_];
+//
+//	popoverController_.delegate = self;
+//
+//    CGRect bounds = CGRectIntegral([canvas_ convertRectToView:[text bounds]]);
+//
+//    UIPopoverArrowDirection permittedArrowDir = (UIPopoverArrowDirectionDown | UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight);
+//    [popoverController_ presentPopoverFromRect:bounds inView:self.view permittedArrowDirections:permittedArrowDir animated:YES];
 }
 
 #pragma mark -
 #pragma mark Interface Rotation
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [canvas_.selectionView removeFromSuperview];
-    canvas_.selectionView = nil;
-    
-    [canvas_.eraserPreview removeFromSuperview];
-    canvas_.eraserPreview = nil;
-    
-    [canvas_ cacheVisibleRectCenter];
-    [canvas_ showRulers:NO animated:NO];
-    
-    [canvas_ nixMessageLabel];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [canvas_ setVisibleRectCenterFromCached];
-    [canvas_ rotateToInterfaceOrientation];
-    
-    [canvas_ showRulers:self.drawing.rulersVisible animated:NO];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [canvas_ ensureToolPaletteIsOnScreen];
-    [balanceController_ bringOnScreenAnimated:YES];
-    [hueController_ bringOnScreenAnimated:YES];
-}
+//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    [canvas_.selectionView removeFromSuperview];
+//    canvas_.selectionView = nil;
+//
+//    [canvas_.eraserPreview removeFromSuperview];
+//    canvas_.eraserPreview = nil;
+//
+//    [canvas_ cacheVisibleRectCenter];
+//    [canvas_ showRulers:NO animated:NO];
+//
+//    [canvas_ nixMessageLabel];
+//}
+//
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+//{
+//    [canvas_ setVisibleRectCenterFromCached];
+//    [canvas_ rotateToInterfaceOrientation];
+//
+//    [canvas_ showRulers:self.drawing.rulersVisible animated:NO];
+//}
+//
+//- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    [canvas_ ensureToolPaletteIsOnScreen];
+//    [balanceController_ bringOnScreenAnimated:YES];
+//    [hueController_ bringOnScreenAnimated:YES];
+//}
 
 #pragma mark -
 #pragma mark Show Controllers
@@ -123,17 +121,17 @@
         return NO;
     }
     
-    if (insideNav && [popoverController_.contentViewController isKindOfClass:[UINavigationController class]]) {
-        NSArray *viewControllers = [(UINavigationController *)popoverController_.contentViewController viewControllers];
-        
-        for (UIViewController *viewController in viewControllers) {
-            if ([viewController isKindOfClass:controllerClass]) {
-                return YES;
-            }
-        }
-    } else if ([popoverController_.contentViewController isKindOfClass:controllerClass]) {
-        return YES;
-    }
+//    if (insideNav && [popoverController_.contentViewController isKindOfClass:[UINavigationController class]]) {
+//        NSArray *viewControllers = [(UINavigationController *)popoverController_.contentViewController viewControllers];
+//
+//        for (UIViewController *viewController in viewControllers) {
+//            if ([viewController isKindOfClass:controllerClass]) {
+//                return YES;
+//            }
+//        }
+//    } else if ([popoverController_.contentViewController isKindOfClass:controllerClass]) {
+//        return YES;
+//    }
     
     return NO;
 }
@@ -194,8 +192,8 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [popoverController_ dismissPopoverAnimated:YES];
-    popoverController_ = nil;
+//    [popoverController_ dismissPopoverAnimated:YES];
+//    popoverController_ = nil;
 }
 
 #pragma mark -
@@ -203,10 +201,10 @@
 
 - (void) showActionMenu:(id)sender
 {
-    if (popoverController_ && (popoverController_.contentViewController.view == actionMenu_)) {
-        [self hidePopovers];
-        return;
-    }
+//    if (popoverController_ && (popoverController_.contentViewController.view == actionMenu_)) {
+//        [self hidePopovers];
+//        return;
+//    }
     
     if (!actionMenu_) {
         NSMutableArray  *menus = [NSMutableArray array];
@@ -272,10 +270,10 @@
 
 - (void) showObjectMenu:(id)sender
 {
-    if (popoverController_ && (popoverController_.contentViewController.view == objectMenu_)) {
-        [self hidePopovers];
-        return;
-    }
+//    if (popoverController_ && (popoverController_.contentViewController.view == objectMenu_)) {
+//        [self hidePopovers];
+//        return;
+//    }
     
     if (!objectMenu_) {
         NSMutableArray  *menus = [NSMutableArray array];
@@ -352,10 +350,10 @@
 
 - (void) showArrangeMenu:(id)sender
 {
-    if (popoverController_ && (popoverController_.contentViewController.view == arrangeMenu_)) {
-        [self hidePopovers];
-        return;
-    }
+//    if (popoverController_ && (popoverController_.contentViewController.view == arrangeMenu_)) {
+//        [self hidePopovers];
+//        return;
+//    }
     
     if (!arrangeMenu_) {
         NSMutableArray  *menus = [NSMutableArray array];
@@ -465,10 +463,10 @@
 
 - (void) showPathMenu:(id)sender
 {
-    if (popoverController_ && (popoverController_.contentViewController.view == pathMenu_)) {
-        [self hidePopovers];
-        return;
-    }
+//    if (popoverController_ && (popoverController_.contentViewController.view == pathMenu_)) {
+//        [self hidePopovers];
+//        return;
+//    }
     
     if (!pathMenu_) {
         NSMutableArray  *menus = [NSMutableArray array];
@@ -561,13 +559,13 @@
 
 - (void) showColorMenu:(id)sender
 {
-    if ((popoverController_ && (popoverController_.contentViewController.view == colorMenu_)) ||
-        [self shouldDismissPopoverForClassController:[WDHueSaturationController class] insideNavController:YES] ||
-        [self shouldDismissPopoverForClassController:[WDColorBalanceController class] insideNavController:YES])
-    {
-        [self hidePopovers];
-        return;
-    }
+//    if ((popoverController_ && (popoverController_.contentViewController.view == colorMenu_)) ||
+//        [self shouldDismissPopoverForClassController:[WDHueSaturationController class] insideNavController:YES] ||
+//        [self shouldDismissPopoverForClassController:[WDColorBalanceController class] insideNavController:YES])
+//    {
+//        [self hidePopovers];
+//        return;
+//    }
     
     if (!colorMenu_) {
         NSMutableArray  *menus = [NSMutableArray array];
@@ -914,38 +912,39 @@
 #pragma mark -
 #pragma mark Popover Management
 
-- (UIPopoverController *) runPopoverWithController:(UIViewController *)controller from:(id)sender
+- (UIViewController *) runPopoverWithController:(UIViewController *)controller from:(id)sender
 {
-    [self hidePopovers];
-    
-    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:controller];
-	popoverController_.delegate = self;
-    popoverController_.passthroughViews = @[self.navigationController.toolbar,
-                                           self.navigationController.navigationBar,
-                                           self.canvas];
-    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    return popoverController_;
+//    [self hidePopovers];
+//
+//    popoverController_ = [[UIPopoverController alloc] initWithContentViewController:controller];
+//	popoverController_.delegate = self;
+//    popoverController_.passthroughViews = @[self.navigationController.toolbar,
+//                                           self.navigationController.navigationBar,
+//                                           self.canvas];
+//    [popoverController_ presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//
+//    return popoverController_;
+    return [UIViewController alloc];
 }
 
 - (void) hidePopovers
 {
-    if (popoverController_) {
-        [popoverController_ dismissPopoverAnimated:NO];
-        popoverController_ = nil;
-        visibleMenu_ = nil;
-    }
+//    if (popoverController_) {
+//        [popoverController_ dismissPopoverAnimated:NO];
+//        popoverController_ = nil;
+//        visibleMenu_ = nil;
+//    }
     
     [[UIPrintInteractionController sharedPrintController] dismissAnimated:NO];
 }
 
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    if (popoverController == popoverController_) {
-        popoverController_ = nil;
-        visibleMenu_ = nil;
-    }
-}
+//- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+//{
+//    if (popoverController == popoverController_) {
+//        popoverController_ = nil;
+//        visibleMenu_ = nil;
+//    }
+//}
 
 - (void) undo:(id)sender
 {
@@ -967,17 +966,17 @@
     } 
 
     UIBarButtonItem *objectItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit")
-                                                 style:UIBarButtonItemStyleBordered
+                                                 style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(showObjectMenu:)];
     
     UIBarButtonItem *arrangeItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Arrange", @"Arrange")
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(showArrangeMenu:)];
     
     UIBarButtonItem *pathItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Path", @"Path")
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(showPathMenu:)];
     
@@ -1020,7 +1019,7 @@
     imageButton.barButtonItem = swatchItem;
     
     layerItem_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Layers", @"Layers")
-                                                  style:UIBarButtonItemStyleBordered
+                                                  style:UIBarButtonItemStylePlain
                                                  target:self
                                                  action:@selector(showLayers:)];
     
@@ -1146,8 +1145,8 @@
 - (void) undoStatusDidChange:(NSNotification *)aNotification
 {
     dispatch_async(dispatch_get_main_queue(), ^{ 
-        undoItem_.enabled = [document_.undoManager canUndo];
-        redoItem_.enabled = [document_.undoManager canRedo];
+        self->undoItem_.enabled = [self->document_.undoManager canUndo];
+        self->redoItem_.enabled = [self->document_.undoManager canRedo];
         
         // stick this at the end of the queue to make sure that
         // the model has time to respond to the notification first
@@ -1412,24 +1411,26 @@
 
 - (void) postOnFacebook:(id)sender
 {
-    SLComposeViewController *facebookSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    
-    [facebookSheet addImage:self.drawing.image];
-    [facebookSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
-    
-    [self presentViewController:facebookSheet animated:YES completion:nil];
+//    SLComposeViewController *facebookSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+//
+//    [facebookSheet addImage:self.drawing.image];
+//    [facebookSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
+//
+//    dispatch_async(dispatch_get_main_queue(), ^ {
+//        [self presentViewController:facebookSheet animated:YES completion:nil];
+//    });
 }
 
 - (void) tweetDrawing:(id)sender
 {
-    SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    
-    [tweetSheet addImage:self.drawing.image];
-    [tweetSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
-
-    [self hidePopovers];
-    
-    [self presentViewController:tweetSheet animated:YES completion:nil];
+//    SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+//    
+//    [tweetSheet addImage:self.drawing.image];
+//    [tweetSheet setInitialText:NSLocalizedString(@"Check out my Inkpad drawing!", @"Check out my Inkpad drawing!")];
+//
+//    [self hidePopovers];
+//    
+//    [self presentViewController:tweetSheet animated:YES completion:nil];
 }
 
 - (void) copyDrawing:(id)sender

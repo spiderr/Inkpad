@@ -9,10 +9,8 @@
 //  Copyright (c) 2011-2013 Steve Sprang
 //
 
-#import <DropboxSDK/DBMetadata.h>
-
-@interface DBMetadata (Additions)
-
-- (NSDictionary *)dictionaryRepresentation;
-
-@end
+//#import <DropboxSDK/DBMetadata.h>
+//
+//@interface DBMetadata (Additions)
+//
+//@end

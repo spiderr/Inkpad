@@ -5,7 +5,7 @@
 //  Created by Brian Smith on 5/3/10.
 //  Copyright 2010 Dropbox, Inc. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 
 @interface DBMetadata : NSObject <NSCoding> {
     BOOL thumbnailExists;

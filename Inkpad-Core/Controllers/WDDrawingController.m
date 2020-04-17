@@ -12,15 +12,14 @@
 #if TARGET_OS_IPHONE
 #import <MobileCoreServices/MobileCoreServices.h>
 #endif
+#import <MobileCoreServices/MobileCoreServices.h>
 
 #import "NSArray+Additions.h"
 #import "NSString+Additions.h"
 #import "UIImage+Additions.h"
-#import "WDAbstractPath.h"
 #import "WDBezierNode.h"
 #import "WDColor.h"
 #import "WDCompoundPath.h"
-#import "WDDrawing.h"
 #import "WDDrawingController.h"
 #import "WDDynamicGuideController.h"
 #import "WDFontManager.h"
@@ -28,7 +27,6 @@
 #import "WDImage.h"
 #import "WDInspectableProperties.h"
 #import "WDLayer.h"
-#import "WDPath.h"
 #import "WDPathfinder.h"
 #import "WDPropertyManager.h"
 #import "WDText.h"
@@ -359,7 +357,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
         }
         
         NSArray *unselected = [layer.elements filter:^BOOL(id obj) {
-            return ![selectedObjects_ containsObject:obj];
+            return ![self->selectedObjects_ containsObject:obj];
         }];
         
         [result addObjectsFromArray:unselected];
@@ -826,7 +824,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 
 - (void) deleteAnchors:(id)sender
 {
-    [self.selectedPaths makeObjectsPerformSelector:@selector(deleteAnchors)];
+//    [self.selectedPaths makeObjectsPerformSelector:@selector(deleteAnchors)];
 }
 
 - (void) reversePathDirection:(id)sender

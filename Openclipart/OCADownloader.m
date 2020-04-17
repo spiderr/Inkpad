@@ -49,9 +49,9 @@
     self.data = [NSMutableData data];
     
     // start downloading
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString_]];
-    connection_ = [NSURLConnection connectionWithRequest:request delegate:self];
-    [connection_ start];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString_]];
+//    connection_ = [NSURLConnection connectionWithRequest:request delegate:self];
+//    [connection_ start];
     
     return self;
 }

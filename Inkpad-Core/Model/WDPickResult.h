@@ -10,6 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CoreGraphics/CoreGraphics.h"
 
 enum {
     kWDSnapNodes            = 1 << 0,

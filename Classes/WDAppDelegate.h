@@ -10,9 +10,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <DropboxSDK/DropboxSDK.h>
+//#import <DropboxSDK/DropboxSDK.h>
 
-@interface WDAppDelegate : NSObject <UIApplicationDelegate, DBSessionDelegate, UIAlertViewDelegate>
+@interface WDAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, copy) void (^performAfterDropboxLoginBlock)(void);

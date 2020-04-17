@@ -14,6 +14,7 @@
 #import "WDRulerView.h"
 #import "WDRulerUnit.h"
 #import "WDUnitsController.h"
+#import "CoreGraphics/CoreGraphics.h"
 
 @implementation WDSettingsController
 
@@ -223,7 +224,7 @@
     
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [formatter setMaximumFractionDigits:2];
-    [formatter setRoundingMode:kCFNumberFormatterRoundCeiling];
+    [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
     [formatter setUsesGroupingSeparator:NO];
     
     NSString *width = [formatter stringFromNumber:@(size.width / unit.conversionFactor)];

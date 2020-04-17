@@ -11,7 +11,7 @@
 //  Copyright (c) 2011-2013 Steve Sprang
 //
 
-#import <DropboxSDK/DropboxSDK.h>
+//#import <DropboxSDK/DropboxSDK.h>
 #import "UIImage+Additions.h"
 #import "WDAppDelegate.h"
 #import "WDImportController.h"
@@ -92,8 +92,8 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 		[fm createDirectoryAtPath:imageCacheDirectory_ withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	
-	dropboxClient_ = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-	dropboxClient_.delegate = self;
+//	dropboxClient_ = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+//	dropboxClient_.delegate = self;
     
     
 	importButton_ = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Import", @"Import")
@@ -128,7 +128,7 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 		NSString *lastPathVisited = [[NSUserDefaults standardUserDefaults] stringForKey:WDDropboxLastPathVisited];
 		if ([lastPathVisited isEqual:rootPath]) {
 			[activityIndicator_ startAnimating];
-			[dropboxClient_	loadMetadata:remotePath_];			
+//			[dropboxClient_	loadMetadata:remotePath_];
 			
 		} else if (lastPathVisited.length > 1) {
 			NSString *currentPath = rootPath;
@@ -150,7 +150,7 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 	// pushed or popped-to view controller
 	} else {
 		[activityIndicator_ startAnimating];
-		[dropboxClient_	loadMetadata:remotePath_];
+//		[dropboxClient_	loadMetadata:remotePath_];
 	}
 }
 
@@ -171,57 +171,57 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {	
-	DBMetadata *dropboxItem = dropboxItems_[indexPath.row];
+//	DBMetadata *dropboxItem = dropboxItems_[indexPath.row];
 	UITableViewCell *cell = nil;
-	
-	if (dropboxItem.isDirectory) {
-		static NSString *kDirectoryCellIdentifier = @"kDirectoryCellIdentifier";
-		cell = [tableView dequeueReusableCellWithIdentifier:kDirectoryCellIdentifier];
-		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kDirectoryCellIdentifier];
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.imageView.image = [UIImage imageNamed:@"dropbox_icon_directory.png"];
-		}
-	} else {
-		static NSString *kItemCellIdentifier = @"kItemCellIdentifier";
-		cell = [contentsTable_ dequeueReusableCellWithIdentifier:kItemCellIdentifier];
-		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kItemCellIdentifier];
-		}
-		
-		BOOL supportedFile = [WDImportController canImportType:[dropboxItem.path pathExtension]];
-		cell.textLabel.textColor = supportedFile ? [UIColor blackColor] : [UIColor grayColor];
-		cell.userInteractionEnabled = supportedFile ? YES : NO;
-		cell.imageView.image = [self iconForPathExtension:[dropboxItem.path pathExtension]];
-		
-		if (dropboxItem.thumbnailExists) {
-            // keep the path extension since multiple files can have the same name (with different extensions)
-			NSString    *flatPath = [dropboxItem.path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
-			NSString    *cachedImagePath = [imageCacheDirectory_ stringByAppendingString:flatPath];
-			UIImage     *dropboxItemIcon = [UIImage imageWithContentsOfFile:cachedImagePath];
-            BOOL        outOfDate = NO;
-            
-			if (dropboxItemIcon) {
-				cell.imageView.image = dropboxItemIcon;
-                
-                // we have a cached thumbnail, see if it's out of date relative to Dropbox
-                NSFileManager *fm = [NSFileManager defaultManager];
-                NSDictionary *attrs = [fm attributesOfItemAtPath:cachedImagePath error:NULL];
-                NSDate *cachedDate = attrs[NSFileModificationDate];
-                outOfDate = !cachedDate || [cachedDate compare:dropboxItem.lastModifiedDate] == NSOrderedAscending;
-			} 
-            
-            if (!dropboxItemIcon || outOfDate) {
-				itemsKeyedByImagePath_[cachedImagePath] = dropboxItem;
-				[dropboxClient_ loadThumbnail:dropboxItem.path ofSize:kDropboxThumbSizeLarge intoPath:cachedImagePath];
-            }
-		}
+//
+//	if (dropboxItem.isDirectory) {
+//		static NSString *kDirectoryCellIdentifier = @"kDirectoryCellIdentifier";
+//		cell = [tableView dequeueReusableCellWithIdentifier:kDirectoryCellIdentifier];
+//		if (cell == nil) {
+//			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kDirectoryCellIdentifier];
+//			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//			cell.imageView.image = [UIImage imageNamed:@"dropbox_icon_directory.png"];
+//		}
+//	} else {
+//		static NSString *kItemCellIdentifier = @"kItemCellIdentifier";
+//		cell = [contentsTable_ dequeueReusableCellWithIdentifier:kItemCellIdentifier];
+//		if (cell == nil) {
+//			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kItemCellIdentifier];
+//		}
+//
+//		BOOL supportedFile = [WDImportController canImportType:[dropboxItem.path pathExtension]];
+//		cell.textLabel.textColor = supportedFile ? [UIColor blackColor] : [UIColor grayColor];
+//		cell.userInteractionEnabled = supportedFile ? YES : NO;
+//		cell.imageView.image = [self iconForPathExtension:[dropboxItem.path pathExtension]];
+//
+//		if (dropboxItem.thumbnailExists) {
+//            // keep the path extension since multiple files can have the same name (with different extensions)
+//			NSString    *flatPath = [dropboxItem.path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+//			NSString    *cachedImagePath = [imageCacheDirectory_ stringByAppendingString:flatPath];
+//			UIImage     *dropboxItemIcon = [UIImage imageWithContentsOfFile:cachedImagePath];
+//            BOOL        outOfDate = NO;
+//
+//			if (dropboxItemIcon) {
+//				cell.imageView.image = dropboxItemIcon;
+//
+//                // we have a cached thumbnail, see if it's out of date relative to Dropbox
+//                NSFileManager *fm = [NSFileManager defaultManager];
+//                NSDictionary *attrs = [fm attributesOfItemAtPath:cachedImagePath error:NULL];
+//                NSDate *cachedDate = attrs[NSFileModificationDate];
+//                outOfDate = !cachedDate || [cachedDate compare:dropboxItem.lastModifiedDate] == NSOrderedAscending;
+//			}
+//
+//            if (!dropboxItemIcon || outOfDate) {
+//				itemsKeyedByImagePath_[cachedImagePath] = dropboxItem;
+//				[dropboxClient_ loadThumbnail:dropboxItem.path ofSize:kDropboxThumbSizeLarge intoPath:cachedImagePath];
+//            }
+//		}
         
         // always need to update the cell checkmark since they're reused
-        [cell setAccessoryType:[selectedItems_ containsObject:dropboxItem] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone];
-	}
+//        [cell setAccessoryType:[selectedItems_ containsObject:dropboxItem] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone];
+//	}
 
-	cell.textLabel.text = [[dropboxItem path] lastPathComponent];
+//	cell.textLabel.text = [[dropboxItem path] lastPathComponent];
 	return cell;
 }
 
@@ -230,42 +230,42 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	DBMetadata *selectedItem = dropboxItems_[indexPath.row];	
+//	DBMetadata *selectedItem = dropboxItems_[indexPath.row];
 
-	if (selectedItem.isDirectory) {		
-		WDImportController *subdirectoryImportController = [self subdirectoryImportControllerForPath:selectedItem.path];
-		[self.navigationController pushViewController:subdirectoryImportController animated:YES];
-	} else {
-		if (![selectedItems_ containsObject:selectedItem]) {
-			[selectedItems_ addObject:selectedItem];
-			[[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
-		} else {
-			[selectedItems_ removeObject:selectedItem];
-			[[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
-		}
-	}
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-	[importButton_ setTitle:[self importButtonTitle]];
-	[importButton_ setEnabled:selectedItems_.count > 0 ? YES : NO];
+//	if (selectedItem.isDirectory) {
+//		WDImportController *subdirectoryImportController = [self subdirectoryImportControllerForPath:selectedItem.path];
+//		[self.navigationController pushViewController:subdirectoryImportController animated:YES];
+//	} else {
+//		if (![selectedItems_ containsObject:selectedItem]) {
+//			[selectedItems_ addObject:selectedItem];
+//			[[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+//		} else {
+//			[selectedItems_ removeObject:selectedItem];
+//			[[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
+//		}
+//	}
+//
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//
+//	[importButton_ setTitle:[self importButtonTitle]];
+//	[importButton_ setEnabled:selectedItems_.count > 0 ? YES : NO];
 }
 
 #pragma mark -
 #pragma mark DBRestClientDelegate
 
-- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
-{	
-    if (metadata.isDeleted) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WDDropboxSubdirectoryMissingNotification object:nil];
-        return;
-    }
-    
-    [activityIndicator_ stopAnimating];
-    NSPredicate *removeSoftDeletedFilesPredicate = [NSPredicate predicateWithFormat:@"self.isDeleted == NO"];
-    dropboxItems_ = [metadata.contents filteredArrayUsingPredicate:removeSoftDeletedFilesPredicate];
-    [contentsTable_ reloadData];
-}
+//- (void)restClient:(DBRestClient*)client loadedMetadata:(DBMetadata*)metadata
+//{
+//    if (metadata.isDeleted) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:WDDropboxSubdirectoryMissingNotification object:nil];
+//        return;
+//    }
+//
+//    [activityIndicator_ stopAnimating];
+//    NSPredicate *removeSoftDeletedFilesPredicate = [NSPredicate predicateWithFormat:@"self.isDeleted == NO"];
+//    dropboxItems_ = [metadata.contents filteredArrayUsingPredicate:removeSoftDeletedFilesPredicate];
+//    [contentsTable_ reloadData];
+//}
 
 - (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
 {
@@ -274,7 +274,7 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 	if ([error code] == 404 && [missingRemotePath isEqualToString:lastVisitedPath]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:WDDropboxSubdirectoryMissingNotification object:nil];
 	} else if ([error code] == 404 && [[[[error userInfo] valueForKey:@"path"] lastPathComponent] isEqualToString:@"Inkpad"]) {
-		[dropboxClient_ createFolder:@"/Inkpad"];
+//		[dropboxClient_ createFolder:@"/Inkpad"];
 	} else {
 		[activityIndicator_ stopAnimating];
 #if WD_DEBUG
@@ -283,10 +283,10 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 	}
 }
 
-- (void)restClient:(DBRestClient*)client createdFolder:(DBMetadata*)folder 
-{	
-	[dropboxClient_ loadMetadata:folder.path];
-}
+//- (void)restClient:(DBRestClient*)client createdFolder:(DBMetadata*)folder
+//{
+//	[dropboxClient_ loadMetadata:folder.path];
+//}
 
 - (void)restClient:(DBRestClient*)client createFolderFailedWithError:(NSError*)error
 {
@@ -309,29 +309,29 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 	[UIImagePNGRepresentation(scaledImage) writeToFile:imagePath atomically:YES];
 	
-	DBMetadata *item = [itemsKeyedByImagePath_ valueForKey:imagePath];
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[dropboxItems_ indexOfObject:item] inSection:0];
-	
-	[contentsTable_ reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-	[itemsKeyedByImagePath_ removeObjectForKey:imagePath];
+//	DBMetadata *item = [itemsKeyedByImagePath_ valueForKey:imagePath];
+//	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[dropboxItems_ indexOfObject:item] inSection:0];
+//	
+//	[contentsTable_ reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//	[itemsKeyedByImagePath_ removeObjectForKey:imagePath];
 }
 
 - (void)restClient:(DBRestClient*)client loadThumbnailFailedWithError:(NSError*)error
 {
-	NSString *itemRemotePath = [[error userInfo] valueForKey:@"path"];
-	NSString *itemLocalPath = [[error userInfo] valueForKey:@"destinationPath"];
+//	NSString *itemRemotePath = [[error userInfo] valueForKey:@"path"];
+//	NSString *itemLocalPath = [[error userInfo] valueForKey:@"destinationPath"];
 	
-	DBMetadata *failedItem = [itemsKeyedByImagePath_ valueForKey:itemLocalPath];
+//	DBMetadata *failedItem = [itemsKeyedByImagePath_ valueForKey:itemLocalPath];
 	
-	if ([itemsFailedImageLoading_ containsObject:failedItem]) {
-#if WD_DEBUG
-		NSLog(@"Loading dropbox thumbnail encountered error: %@", error);
-#endif
-		return;
-	} else {
-		[itemsFailedImageLoading_ addObject:failedItem];
-		[dropboxClient_ loadThumbnail:itemRemotePath ofSize:kDropboxThumbSizeLarge intoPath:itemLocalPath];
-	}
+//	if ([itemsFailedImageLoading_ containsObject:failedItem]) {
+//#if WD_DEBUG
+//		NSLog(@"Loading dropbox thumbnail encountered error: %@", error);
+//#endif
+//		return;
+//	} else {
+//		[itemsFailedImageLoading_ addObject:failedItem];
+//		[dropboxClient_ loadThumbnail:itemRemotePath ofSize:kDropboxThumbSizeLarge intoPath:itemLocalPath];
+//	}
 }
 
 #pragma mark -
@@ -381,7 +381,7 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 - (NSArray *)toolbarItems
 {
     UIBarButtonItem *flexibleSpaceItem = [UIBarButtonItem flexibleItem];
-    UIBarButtonItem *unlinkButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox") style:UIBarButtonItemStyleBordered target:self action:@selector(unlinkDropbox:)];
+    UIBarButtonItem *unlinkButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox") style:UIBarButtonItemStylePlain target:self action:@selector(unlinkDropbox:)];
 
     NSArray *toolbarItems = @[flexibleSpaceItem, unlinkButtonItem];
 

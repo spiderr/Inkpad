@@ -11,7 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import "OCADownloader.h"
-
+#import <UIkit/UIKit.h>
 @protocol WDOpenClipArtThumbnailReceiver <NSObject>
 - (void) setThumbnail:(UIImage *)thumbnail;
 @end

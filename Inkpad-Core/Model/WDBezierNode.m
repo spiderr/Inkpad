@@ -14,7 +14,7 @@
 
 #else
 #import <UIKit/UIKit.h>
-#import <OpenGL/gl.h>
+//#import <OpenGL/gl.h>
 #endif
 
 #import "UIColor+Additions.h"

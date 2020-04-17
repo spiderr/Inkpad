@@ -9,17 +9,12 @@
 //  Copyright (c) 2009-2013 Steve Sprang
 //
 
-#if !TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import "NSCoderAdditions.h"
-#endif
 
 #import <CoreText/CoreText.h>
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
-#import "WDBezierSegment.h"
 #import "WDColor.h"
-#import "WDDrawing.h"
 #import "WDFillTransform.h"
 #import "WDFontManager.h"
 #import "WDGLUtilities.h"
@@ -62,7 +57,7 @@ NSString *WDAlignmentKey = @"WDAlignmentKey";
     [coder encodeObject:text_ forKey:WDTextKey];
     [coder encodeObject:fontName_ forKey:WDFontNameKey];
     [coder encodeFloat:fontSize_ forKey:WDFontSizeKey];
-    [coder encodeInt32:alignment_ forKey:WDAlignmentKey];
+    [coder encodeInt64:alignment_ forKey:WDAlignmentKey];
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -800,10 +795,10 @@ NSString *WDAlignmentKey = @"WDAlignmentKey";
         CTTextAlignment alignment;
         
         switch (alignment_) {
-            case NSTextAlignmentLeft: alignment = kCTLeftTextAlignment; break;
-            case NSTextAlignmentRight: alignment = kCTRightTextAlignment; break;
-            case NSTextAlignmentCenter: alignment = kCTCenterTextAlignment; break;
-            default: alignment = kCTLeftTextAlignment; break;
+            case NSTextAlignmentLeft: alignment = kCTTextAlignmentLeft; break;
+            case NSTextAlignmentRight: alignment = kCTTextAlignmentRight; break;
+            case NSTextAlignmentCenter: alignment = kCTTextAlignmentCenter; break;
+            default: alignment = kCTTextAlignmentNatural; break;
         }
 		
         CTParagraphStyleSetting settings[] = {

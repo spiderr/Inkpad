@@ -147,9 +147,10 @@
 {
     [self setIndexOfSelectedItem:(-1)];
 
-    [popover_ dismissPopoverAnimated:YES];
+//    [popover_ dismissPopoverAnimated:YES];
+    [popover_ dismissViewControllerAnimated:YES completion:^{ }];
+//    [delegate_ popoverControllerDidDismissPopover:popover_];
     
-    [delegate_ popoverControllerDidDismissPopover:popover_];
 }
 
 @end

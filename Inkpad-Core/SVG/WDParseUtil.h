@@ -12,7 +12,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "CoreGraphics/CoreGraphics.h"
 
 static inline BOOL charIsWhitespace(unichar c)
 {

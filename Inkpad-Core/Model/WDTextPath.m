@@ -11,14 +11,12 @@
 
 #if !TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import "NSCoderAdditions.h"
 #endif
 
 #import <CoreText/CoreText.h>
 #import "NSString+Additions.h"
 #import "UIColor+Additions.h"
 #import "WDBezierNode.h"
-#import "WDBezierSegment.h"
 #import "WDColor.h"
 #import "WDFillTransform.h"
 #import "WDFontManager.h"

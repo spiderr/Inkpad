@@ -10,8 +10,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WDElement.h"
-#import "WDStrokeStyle.h"
 
 @class WDCanvas;
 @class WDColorBalanceController;
@@ -66,7 +64,7 @@ enum {
     WDMenu              *actionMenu_;
     WDMenu              *visibleMenu_; // pointer to currently active menu
     
-    UIPopoverController *popoverController_;
+    UIViewController *popoverController_;
     
     WDSwatchController  *swatchController_;
     WDStrokeController  *strokeController_;
@@ -90,7 +88,7 @@ enum {
 - (void) hidePopovers;
 
 - (BOOL) shouldDismissPopoverForClassController:(Class)controllerClass insideNavController:(BOOL)insideNav;
-- (UIPopoverController *) runPopoverWithController:(UIViewController *)controller from:(id)sender;
+- (UIViewController *) runPopoverWithController:(UIViewController *)controller from:(id)sender;
 
 - (void) validateMenuItem:(WDMenuItem *)item;
 - (void) validateVisibleMenuItems;

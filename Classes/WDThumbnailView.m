@@ -86,10 +86,10 @@
         selectedIndicator_.sharpCenter = center;
     } else if (!flag && selectedIndicator_){
         [UIView animateWithDuration:0.1f
-                         animations:^{ selectedIndicator_.alpha = 0; }
+                         animations:^{ self->selectedIndicator_.alpha = 0; }
                          completion:^(BOOL finished){
-                             [selectedIndicator_ removeFromSuperview];
-                             selectedIndicator_ = nil;
+            [self->selectedIndicator_ removeFromSuperview];
+                             self->selectedIndicator_ = nil;
                          }];
     }
  }
@@ -145,9 +145,12 @@
     }
     
     if (errorMessage) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-        
+        UIAlertController *alertView = [[UIAlertController alloc] init];
+        [alertView setMessage:errorMessage];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alertView addAction:okAction];
+//        UIAlertController *alertView = [[UIAlertController alloc] initWithTitle:nil message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alertView show];
         [self reloadFilenameFields_];
     }
 }

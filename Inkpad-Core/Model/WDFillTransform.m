@@ -11,7 +11,7 @@
 
 #if !TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import "NSCoderAdditions.h"
+//#import "NSCoderAdditions.h"
 #endif
 
 #import "WDFillTransform.h"

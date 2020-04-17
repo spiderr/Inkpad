@@ -12,7 +12,6 @@
 #import "WDDrawingController.h"
 #import "WDColor.h"
 #import "WDColorSlider.h"
-#import "WDElement.h"
 #import "WDHueSaturationController.h"
 #import "WDHueShifter.h"
 
@@ -33,9 +32,9 @@
 
 - (void) performAdjustment
 {
-    [self.drawingController adjustColor:^(WDColor *color) { return [color adjustHue:hueShift_
-                                                                    saturation:saturationShift_
-                                                                    brightness:brightnessShift_]; }
+    [self.drawingController adjustColor:^(WDColor *color) { return [color adjustHue:self->hueShift_
+                                                                         saturation:self->saturationShift_
+                                                                    brightness:self->brightnessShift_]; }
                              scope:(WDColorAdjustStroke | WDColorAdjustFill | WDColorAdjustShadow)];
 
 }

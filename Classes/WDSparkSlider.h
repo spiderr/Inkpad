@@ -10,6 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIKit/UIKit.h"
 
 @interface WDSparkSlider : UIControl {
     UILabel         *valueLabel_;

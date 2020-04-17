@@ -10,6 +10,7 @@
 //
 
 #import "WDRulerUnit.h"
+#import "CoreGraphics/CoreGraphics.h"
 
 static NSMutableDictionary *registeredUnits_ = nil;
 

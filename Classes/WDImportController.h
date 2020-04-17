@@ -17,8 +17,7 @@
 
 @class DBRestClient;
 
-@interface WDImportController : UIViewController <DBRestClientDelegate,
-                UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface WDImportController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
 
 	UIBarButtonItem                     *importButton_;
 	IBOutlet UIActivityIndicatorView    *activityIndicator_;

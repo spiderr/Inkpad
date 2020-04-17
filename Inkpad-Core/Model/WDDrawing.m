@@ -10,14 +10,12 @@
 //
 
 #if !TARGET_OS_IPHONE
-#import "NSCoderAdditions.h"
+//#import "NSCoderAdditions.h"
 #endif
 
 #import "UIColor+Additions.h"
 #import "WDColor.h"
 #import "WDDocumentProtocol.h"
-#import "WDDrawing.h"
-#import "WDElement.h"
 #import "WDImage.h"
 #import "WDImageData.h"
 #import "WDLayer.h"

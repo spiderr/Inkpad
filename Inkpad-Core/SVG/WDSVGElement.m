@@ -14,6 +14,7 @@
 #import "WDSVGElement.h"
 #import "WDSVGParserStateStack.h"
 #import "WDParseUtil.h"
+#import "CoreGraphics/CoreGraphics.h"
 
 
 @implementation WDSVGElement

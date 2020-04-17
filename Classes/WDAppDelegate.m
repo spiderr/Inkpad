@@ -36,14 +36,14 @@ NSString *WDDropboxWasUnlinkedNotification = @"WDDropboxWasUnlinkedNotification"
     #endif
     
     NSLog(@"No Dropbox Keys!");
-    
-    NSString *consumerKey = @"xxxx";
-    NSString *consumerSecret = @"xxxx";
-    
-    DBSession *session = [[DBSession alloc] initWithAppKey:consumerKey appSecret:consumerSecret root:kDBRootDropbox];
-    
-    session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
-    [DBSession setSharedSession:session];
+//    
+//    NSString *consumerKey = @"xxxx";
+//    NSString *consumerSecret = @"xxxx";
+//    
+//    DBSession *session = [[DBSession alloc] initWithAppKey:consumerKey appSecret:consumerSecret root:kDBRootAppFolder];
+//    
+//    session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
+//    [DBSession setSharedSession:session];
     
     // Load the fonts at startup. Dispatch this call at the end of the main queue;
     // It will then dispatch the real work on another queue after the app launches.
@@ -87,38 +87,38 @@ NSString *WDDropboxWasUnlinkedNotification = @"WDDropboxWasUnlinkedNotification"
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) {
-            if (self.performAfterDropboxLoginBlock) {
-                self.performAfterDropboxLoginBlock();
-                self.performAfterDropboxLoginBlock = nil;
-            }
-        }
-        return YES;
-    }
-    
-    [[WDDrawingManager sharedInstance] importDrawingAtURL:url errorBlock:^{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Broken Drawing",
-                                                                                      @"Broken Drawing")
-                                                            message:NSLocalizedString(@"Inkpad could not open the requested drawing.",
-                                                                                      @"Inkpad could not open the requested drawing.")
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    } withCompletionHandler:^(WDDocument *document) {
-        UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
-        
-        if ([navigationController.topViewController isKindOfClass:[WDCanvasController class]]) {
-            WDCanvasController *canvasController = (WDCanvasController *) navigationController.topViewController;
-            canvasController.document = document;
-        }
-    }];
-    
-    return YES;
-}
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    if ([[DBSession sharedSession] handleOpenURL:url]) {
+//        if ([[DBSession sharedSession] isLinked]) {
+//            if (self.performAfterDropboxLoginBlock) {
+//                self.performAfterDropboxLoginBlock();
+//                self.performAfterDropboxLoginBlock = nil;
+//            }
+//        }
+//        return YES;
+//    }
+//    
+//    [[WDDrawingManager sharedInstance] importDrawingAtURL:url errorBlock:^{
+////        UIAlertController *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Broken Drawing",
+////                                                                                      @"Broken Drawing")
+////                                                            message:NSLocalizedString(@"Inkpad could not open the requested drawing.",
+////                                                                                      @"Inkpad could not open the requested drawing.")
+////                                                           delegate:nil
+////                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+////                                                  otherButtonTitles:nil];
+////        [alertView show];
+//    } withCompletionHandler:^(WDDocument *document) {
+//        UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
+//        
+//        if ([navigationController.topViewController isKindOfClass:[WDCanvasController class]]) {
+//            WDCanvasController *canvasController = (WDCanvasController *) navigationController.topViewController;
+//            canvasController.document = document;
+//        }
+//    }];
+//    
+//    return YES;
+//}
 
 - (void) clearTempDirectory
 {
@@ -172,44 +172,44 @@ NSString *WDDropboxWasUnlinkedNotification = @"WDDropboxWasUnlinkedNotification"
 #pragma mark -
 #pragma mark Dropbox
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        return;
-    }
-    
-    if ([[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] unlinkAll];
-    } 
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:WDDropboxWasUnlinkedNotification object:self];
-}
+//- (void) alertView:(UIAlertController *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == alertView.cancelButtonIndex) {
+//        return;
+//    }
+//
+//    if ([[DBSession sharedSession] isLinked]) {
+//        [[DBSession sharedSession] unlinkAll];
+//    }
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:WDDropboxWasUnlinkedNotification object:self];
+//}
 
 - (void) unlinkDropbox
 {
-    if (![[DBSession sharedSession] isLinked]) {
-        return;
-    } 
+//    if (![[DBSession sharedSession] isLinked]) {
+//        return;
+//    }
     
-    NSString *title = NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox");
-    NSString *message = NSLocalizedString(@"Are you sure you want to unlink your Dropbox account?",
-                                          @"Are you sure you want to unlink your Dropbox account?");
+//    NSString *title = NSLocalizedString(@"Unlink Dropbox", @"Unlink Dropbox");
+//    NSString *message = NSLocalizedString(@"Are you sure you want to unlink your Dropbox account?",
+//                                          @"Are you sure you want to unlink your Dropbox account?");
+//    
+//    NSString *unlinkButtonTitle = NSLocalizedString(@"Unlink", @"Unlink");
+//    NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Cancel");
     
-    NSString *unlinkButtonTitle = NSLocalizedString(@"Unlink", @"Unlink");
-    NSString *cancelButtonTitle = NSLocalizedString(@"Cancel", @"Cancel");
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:unlinkButtonTitle, cancelButtonTitle, nil];
-    alertView.cancelButtonIndex = 1;
-    
-    [alertView show];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+//                                                        message:message
+//                                                       delegate:self
+//                                              cancelButtonTitle:nil
+//                                              otherButtonTitles:unlinkButtonTitle, cancelButtonTitle, nil];
+//    alertView.cancelButtonIndex = 1;
+//    
+//    [alertView show];
 }
 
-- (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId
-{
-}
+//- (void)sessionDidReceiveAuthorizationFailure:(DBSession *)session userId:(NSString *)userId
+//{
+//}
 
 @end

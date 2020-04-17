@@ -31,7 +31,6 @@
 
 @interface WDBrowserController : UICollectionViewController <UIActionSheetDelegate,
                                                              UIPopoverControllerDelegate,
-                                                             DBRestClientDelegate,
                                                              MFMailComposeViewControllerDelegate,
                                                              WDImportControllerDelegate,
                                                              WDSamplesControllerDelegate,
@@ -45,11 +44,11 @@
     UIActivityIndicatorView *activityIndicator_;
     UIBarButtonItem         *activityItem_;
     UIBarButtonItem         *deleteItem_;
-    UIActionSheet           *deleteSheet_;
+    UIAlertController           *deleteSheet_;
     
     NSMutableSet            *selectedDrawings_;
     
-    UIPopoverController     *popoverController_;
+    UIViewController     *popoverController_;
     WDPageSizeController    *pageSizeController_;
     WDExportController      *exportController_;
 	WDImportController		*importController_;

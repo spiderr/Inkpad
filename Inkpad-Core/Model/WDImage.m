@@ -11,18 +11,15 @@
 
 #if !TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import "NSCoderAdditions.h"
+//#import "NSCoderAdditions.h"
 #endif
 
 #import "UIColor+Additions.h"
-#import "WDBezierSegment.h"
 #import "WDColor.h"
-#import "WDDrawing.h"
 #import "WDGLUtilities.h"
 #import "WDImage.h"
 #import "WDImageData.h"
 #import "WDLayer.h"
-#import "WDPickResult.h"
 #import "WDShadow.h"
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
