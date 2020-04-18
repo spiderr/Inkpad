@@ -1236,7 +1236,7 @@
     // set a good background color for the window so that orientation changes don't look hideous
     [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithWhite:0.92 alpha:1];
     
-    self.navigationItem.rightBarButtonItems = [self upperRightToolbarItems];
+//    self.navigationItem.rightBarButtonItems = [self upperRightToolbarItems];
 
     if (self.drawing) {
         canvas_.drawing = self.drawing;

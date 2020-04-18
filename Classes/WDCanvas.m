@@ -1032,7 +1032,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (void) startActivity
 {
     if (!activityView_) {
-        [[NSBundle mainBundle] loadNibNamed:@"Activity" owner:self options:nil];
+//        [[NSBundle mainBundle] loadNibNamed:@"Activity" owner:self options:nil];
     }
     
     activityView_.sharpCenter = WDCenterOfRect(self.bounds);

@@ -86,6 +86,7 @@ enum {
 
 - (void) updateTitle;
 - (void) hidePopovers;
+- (void) setDocument:(WDDocument *)document;
 
 - (BOOL) shouldDismissPopoverForClassController:(Class)controllerClass insideNavController:(BOOL)insideNav;
 - (UIViewController *) runPopoverWithController:(UIViewController *)controller from:(id)sender;
