@@ -81,7 +81,7 @@ enum {
 @property (nonatomic, strong) WDDocument *document;
 @property (weak, nonatomic, readonly) WDDrawing *drawing;
 @property (nonatomic, readonly) WDCanvas *canvas;
-@property (nonatomic, readonly, strong) WDDrawingController *drawingController;
+@property (nonatomic, strong) WDDrawingController *drawingController;
 @property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 
 - (void) updateTitle;
